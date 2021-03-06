@@ -1,1 +1,1 @@
-console.log("Bismillah")
+console.log("Initial test")
