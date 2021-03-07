@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Real Time messaging</h1>
+    <pre id="messages" style="height: 400px; overflow: scroll;"></pre>
+    <input type="text" id="messageBox" placeholder="Type your message here">
+    <button id="send">Send message</button>
+    
+    <script>
+        (   function name() {
+            const sendBtn = document.querySelector("#send");
+            const messageBox = document.querySelector("#messageBox");
+            const messages = document.querySelector("#messages");
+            
+            let ws;
+            
+            function showMessage(message) {
+                messages.textContent += `\n\n${message}`;
+                messages.scrollTop = messages.clientHeight;
+                messageBox.value = ''
+            }
+            
+            function init() {
+                if(ws) {
+                    ws.onerror = ws.onopen = ws.onclose = null;
+                    ws.close();
+                }
+                
+                ws = new WebSocket ('ws://localhost:4000')
+                ws.onopen = () => {
+                    console.log('Connection opened')
+                }
+                ws.onmessage = ({data}) => {
+                    showMessage(data);
+                }
+                ws.onclose = () => {
+                    ws = null;
+                }
+                
+            }
+
+            sendBtn.onclick = () => {
+                if(!ws) {
+                    showMessage("no web socket connection")
+                    return
+                }
+                ws.send(messageBox.value);
+                showMessage(messageBox.value);
+            }
+
+            init();
+        })();
+    </script>
+</body>
+</html>

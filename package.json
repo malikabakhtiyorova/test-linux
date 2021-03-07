@@ -1,0 +1,31 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/malikabakhtiyorova/test-linux.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/malikabakhtiyorova/test-linux/issues"
+  },
+  "homepage": "https://github.com/malikabakhtiyorova/test-linux#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "ws": "^7.4.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
